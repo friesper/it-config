@@ -1,0 +1,17 @@
+server:
+  port: 9010
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: ${JDBC_USRENAME:jwxt}
+    password: ${JDBC_PASSWORD:1234}
+    url: jdbc:mysql://${JDBC_URL:sql.7326it.club}:${JDBC_PORT:53306}/jwxt?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+it:
+  auth:
+    clientId: it
+    clientSecret: it
+    scope: server
+
+logging:
+  config: classpath:logback.xml

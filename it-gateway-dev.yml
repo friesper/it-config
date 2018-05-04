@@ -1,0 +1,36 @@
+server:
+  port: 8010
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 30000
+    socket-timeout-millis: 30000
+  routes:
+    it-admin:
+      path: /admin/**
+      serviceId: it-admin
+      stripPrefix: true
+      sensitiveHeaders:
+    it-auth:
+      path: /auth/**
+      serviceId: it-auth
+      stripPrefix: true
+      sensitiveHeaders:
+security:
+  sessions: stateless
+  oauth2:
+    resource:
+      loadBalanced: true
+      user-info-uri: http://it-auth/user
+      prefer-token-info: false
+      service-id: it-gateway
+urls:
+  anon:
+    - /auth/**
+    - /swagger-resources/**
+    - /swagger-ui.html
+    - /*/v2/api-docs
+    - /swagger/api-docs
+    - /webjars/**
+logging:
+  config: classpath:logback.xml
